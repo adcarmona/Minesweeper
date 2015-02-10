@@ -17,13 +17,11 @@ import java.io.IOException;
 public class Minesweeper extends PApplet {
 
 
-
-
 //Declare and initialize NUM_ROWS and NUM_COLS = 20
-final static int NUM_ROWS = 20;
-final static int NUM_COLS = 20;
+public final static int NUM_ROWS = 20;
+public final static int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
-private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
+private ArrayList <MSButton> bombs = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
 public void setup ()
 {
@@ -33,14 +31,31 @@ public void setup ()
     // make the manager
     Interactive.make( this );
     
-
+    buttons = new MSButton [NUM_ROWS][NUM_COLS];
+    for(int row = 0; row < NUM_ROWS; row++)
+    {
+        for(int col = 0; col < NUM_COLS; col++)
+        {
+            buttons[row][col] = new MSButton(row, col);
+        }
+    }
 
     //declare and initialize buttons
+    
     setBombs();
 }
 public void setBombs()
 {
     //your code
+    while(bombs.size() < 10)
+    {
+        int row = (int)(Math.random() * NUM_ROWS);
+        int col = (int)(Math.random() * NUM_COLS);
+        if(!bombs.contains(buttons[row][col]))
+            {
+                bombs.add(buttons[row][col]);
+            }
+    }
 }
 
 public void draw ()
@@ -62,7 +77,6 @@ public void displayWinningMessage()
 {
     //your code here
 }
-
 public class MSButton
 {
     private int r, c;
@@ -95,6 +109,18 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
+        if(keyPressed == true)
+        {
+            marked = !marked;
+        }
+        else if(bombs.contains( this ))
+        {
+            displayLosingMessage();
+        }
+        else if(countBombs( this ) > 0)
+        {
+            setLabel(countBombs( this ));
+        }
         //your code here
     }
 
@@ -102,8 +128,8 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && bombs.contains(this) ) 
+            fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
@@ -120,11 +146,59 @@ public class MSButton
     public boolean isValid(int r, int c)
     {
         //your code here
-        return false;
+        for(int row = 0; row < NUM_ROWS; row++)
+        {
+            if(row == r)
+            {
+                for(int col = 0; row < NUM_COLS; col++)
+                {
+                    if(col == c)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; 
     }
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
+        if(isValid(row, col) == true)
+        {
+            if(bombs.contains(buttons[row-1][col-1]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row][col-1]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row+1][col-1]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row-1][col]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row+1][col]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row-1][col+1]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row][col+1]))
+            {
+                numBombs = numBombs + 1;
+            }
+            if(bombs.contains(buttons[row+1][col+1]))
+            {
+                numBombs = numBombs + 1;
+            }
+        }
         //your code here
         return numBombs;
     }
