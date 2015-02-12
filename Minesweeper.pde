@@ -92,7 +92,38 @@ public class MSButton
         }
         else
         {
-            mousePressed();
+            if (buttons[r-1][c-1].isValid(r-1, c-1) == true && buttons[r-1][c-1].isClicked() == false)
+            {
+               buttons[r-1][c-1].mousePressed(); 
+            }
+            if (buttons[r-1][c].isValid(r-1, c) == true && buttons[r-1][c].isClicked() == false)
+            {
+               buttons[r-1][c].mousePressed(); 
+            }
+            if (buttons[r-1][c+1].isValid(r-1, c+1) == true && buttons[r-1][c+1].isClicked() == false)
+            {
+               buttons[r-1][c+1].mousePressed(); 
+            }
+            if (buttons[r][c-1].isValid(r, c-1) == true && buttons[r][c-1].isClicked() == false)
+            {
+               buttons[r][c-1].mousePressed(); 
+            }
+            if (buttons[r][c+1].isValid(r, c+1) == true && buttons[r-1][c+1].isClicked() == false)
+            {
+               buttons[r][c+1].mousePressed(); 
+            }
+            if (buttons[r+1][c-1].isValid(r+1, c-1) == true && buttons[r+1][c-1].isClicked() == false)
+            {
+               buttons[r+1][c-1].mousePressed(); 
+            }
+            if (buttons[r+1][c].isValid(r+1, c) == true && buttons[r+1][c].isClicked() == false)
+            {
+               buttons[r+1][c].mousePressed(); 
+            }
+            if (buttons[r+1][c+1].isValid(r+1, c+1) == true && buttons[r+1][c+1].isClicked() == false)
+            {
+               buttons[r+1][c+1].mousePressed(); 
+            }
         }
         //your code here
     }
