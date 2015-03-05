@@ -9,10 +9,7 @@ void setup ()
     textAlign(CENTER,CENTER);
     Interactive.make( this );  
     buttons = new MSButton [NUM_ROWS][NUM_COLS];
-    for(int row = 0; row < NUM_ROWS; row++)
-    {
-        for(int col = 0; col < NUM_COLS; col++) {buttons[row][col] = new MSButton(row, col);}
-    }  
+    for(int row = 0; row < NUM_ROWS; row++) {for(int col = 0; col < NUM_COLS; col++) {buttons[row][col] = new MSButton(row, col);}}  
     setBombs();
 }
 public void setBombs()
@@ -48,8 +45,7 @@ public class MSButton
     private int r, c;
     private float x,y, width, height;
     private boolean clicked, marked;
-    private String label;
-    
+    private String label;  
     public MSButton ( int rr, int cc )
     {
         width = 400/NUM_COLS;
@@ -91,15 +87,10 @@ public class MSButton
     }
     public void draw () 
     {    
-        if (marked)
-            fill(100);
-        else if( clicked && bombs.contains(this) ) 
-            fill(255,0,0);
-        else if(clicked)
-            fill( 255 );
-        else 
-            fill( 10 );
-
+        if (marked) {fill(100);}
+        else if(clicked && bombs.contains(this)) {fill(255,0,0);}
+        else if(clicked) {fill( 255 );}
+        else {fill( 50 );}
         rect(x, y, width, height);
         fill(0);
         text(label,x+width/2,y+height/2);
