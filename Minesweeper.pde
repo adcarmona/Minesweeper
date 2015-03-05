@@ -98,7 +98,7 @@ public class MSButton
         else if(clicked)
             fill( 255 );
         else 
-            fill( 0 );
+            fill( 10 );
 
         rect(x, y, width, height);
         fill(0);
