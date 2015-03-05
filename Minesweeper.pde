@@ -92,13 +92,13 @@ public class MSButton
     public void draw () 
     {    
         if (marked)
-            fill(0);
+            fill(100);
         else if( clicked && bombs.contains(this) ) 
             fill(255,0,0);
         else if(clicked)
-            fill( 200 );
+            fill( 255 );
         else 
-            fill( 100 );
+            fill( 0 );
 
         rect(x, y, width, height);
         fill(0);
